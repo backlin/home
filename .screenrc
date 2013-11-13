@@ -1,0 +1,19 @@
+# terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+attrcolor b ".I" 
+# tell screen how to set colors. AB = background, AF=foreground 
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' 
+termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' 
+# erase background with current bg color 
+defbce "on" 
+
+escape ^La
+startup_message off
+autodetach on
+defutf8 on
+
+hardstatus alwayslastline
+hardstatus string '%{= kG}%-Lw%{= kW}%50> %n*%f %t%{= kG}%+Lw%< %{= kG}%-=%D %M %d | %C:%s %A %1`%{-}'
+
+defscrollback 50000
+
