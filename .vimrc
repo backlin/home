@@ -161,8 +161,8 @@ set expandtab
 set smarttab
 
 " 1 tab == 4 spaces
-" set shiftwidth=4
-" set tabstop=4
+set shiftwidth=4
+set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
@@ -407,6 +407,7 @@ nmap <CR> o<Esc>k
 map <F2> :lcd %:p:h<CR>
 
 set nowrap
+set cursorline
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
@@ -425,3 +426,4 @@ nmap <c-s-down> mz:m+<cr>`z
 nmap <c-s-up> mz:m-2<cr>`z
 vmap <c-s-down> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <c-s-up> :m'<-2<cr>`>my`<mzgv`yo`z
+
