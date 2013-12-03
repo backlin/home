@@ -7,7 +7,6 @@ termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # erase background with current bg color 
 defbce "on" 
 
-escape ^La
 startup_message off
 autodetach on
 defutf8 on
@@ -17,3 +16,4 @@ hardstatus string '%{= kG}%-Lw%{= kW}%50> %n*%f %t%{= kG}%+Lw%< %{= kG}%-=%D %M 
 
 defscrollback 50000
 
+source ${HOME}/.screen_patches
