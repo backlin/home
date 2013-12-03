@@ -1,0 +1,5 @@
+# Greeting
+if [ -f ~/.bash_greeting ]; then
+    source ~/.bash_greeting
+fi
+

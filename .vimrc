@@ -129,8 +129,8 @@ set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guioptions-=T
-    set guioptions+=e
+    "set guioptions-=T  " Hide toolbar (disabled)
+    set guioptions+=e   " Window manager's tabs rather than text based
     set t_Co=256
     set guitablabel=%M\ %t
 endif
@@ -399,15 +399,20 @@ endfunction
 " => Mitt och Björns fuffens
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Vim's R integration
 let vimrplugin_noscreenrc = 1   " Use ~/.screenrc instead of the plugin's
 let vimrplugin_tmux = 0 
-set number
+
+" Enter adds new lines without entering insert mode
 nmap <C-Enter> O<Esc>j
 nmap <CR> o<Esc>k
 map <F2> :lcd %:p:h<CR>
 
-set nowrap
-set cursorline
+set mouse=a         " Enables mouse in terminal vim
+set number          " Line numbers
+set nowrap          " No word wrapping
+set cursorline      " Highlight current line
+set showtabline=1   " Only show tabline if more than one tab is open
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
@@ -422,8 +427,16 @@ let g:tex_flavor='latex'
 " Press Space to turn off highlighting and clear any message already displayed.
 nnoremap <silent> <s-Space> :nohlsearch<Bar>:echo<CR>
 
+" Extra keybindings for moving with selected section
 nmap <c-s-down> mz:m+<cr>`z
 nmap <c-s-up> mz:m-2<cr>`z
 vmap <c-s-down> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <c-s-up> :m'<-2<cr>`>my`<mzgv`yo`z
 
+" Convert Rd `tabular` blocks to `describe` blocks
+function! Tabular2describe() range
+    execute a:firstline . "," . a:lastline . "s/\\\\tabular{[lcr]\\{2}}{/\\\\describe{/"
+    execute a:firstline . "," . a:lastline . "s/\\( \\+\\)\\(.\\{-}\\) *\\\\tab *\\(\\_.\\{-}\\) *\\\\cr/\\1\\\\item{\\2}{\\3}/"
+endfunction
+command! -range Tab2desc <line1>,<line2>call Tabular2describe()
+    
