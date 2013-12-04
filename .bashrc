@@ -65,7 +65,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-export PAGER="most"
 export TERM="xterm-256color"
 
 # Add bash aliases.

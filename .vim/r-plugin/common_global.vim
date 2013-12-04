@@ -2800,7 +2800,8 @@ function RCreateSendMaps()
 endfunction
 
 function RBufEnter()
-    if &filetype != g:rplugin_lastft
+    "if &filetype != g:rplugin_lastft
+    if !exists("g:rplugin_lastft") || &filetype != g:rplugin_lastft
         call UnMakeRMenu()
         if &filetype == "r" || &filetype == "rnoweb" || &filetype == "rrst" || &filetype == "rdoc" || &filetype == "rbrowser" || &filetype == "rhelp"
             if &filetype == "rbrowser"
