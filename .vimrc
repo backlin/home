@@ -439,4 +439,6 @@ function! Tabular2describe() range
     execute a:firstline . "," . a:lastline . "s/\\( \\+\\)\\(.\\{-}\\) *\\\\tab *\\(\\_.\\{-}\\) *\\\\cr/\\1\\\\item{\\2}{\\3}/"
 endfunction
 command! -range Tab2desc <line1>,<line2>call Tabular2describe()
-    
+
+" Jump back to position prior to searching
+nmap § ``
