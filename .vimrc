@@ -123,7 +123,7 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-    colorscheme desert
+colorscheme desert
 set background=light
 set background=dark
 
@@ -169,7 +169,6 @@ set lbr
 set tw=500
 
 set ai "Auto indent
-set si "Smart indent
 set wrap "Wrap lines
 
 
@@ -351,6 +350,7 @@ function! VisualSelection(direction) range
     let l:pattern = substitute(l:pattern, "\n$", "", "")
 
     if a:direction == 'b'
+        if 
         execute "normal ?" . l:pattern . "^M"
     elseif a:direction == 'gv'
         call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
@@ -432,6 +432,43 @@ nmap <c-s-down> mz:m+<cr>`z
 nmap <c-s-up> mz:m-2<cr>`z
 vmap <c-s-down> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <c-s-up> :m'<-2<cr>`>my`<mzgv`yo`z
+nmap <c-s-left> <<
+nmap <c-s-right> >>
+vmap <c-s-left> <<<Esc>gv
+vmap <c-s-right> >><Esc>gv
+
+" Move between splits with Alt+<arrow>
+nmap <silent> <A-Up> :wincmd k<CR>
+nmap <silent> <A-Down> :wincmd j<CR>
+nmap <silent> <A-Left> :wincmd h<CR>
+nmap <silent> <A-Right> :wincmd l<CR>
+
+function! NoIndentGQ()
+    try
+        s/^##' //
+    catch
+    endtry
+    set textwidth=76
+    set noai
+    normal! gqip
+    set ai
+    set tw=500
+endfunction
+function! NoIndentGQRange() range
+    try
+        execute a:firstline . "," . a:lastline . "s/^##' //"
+    catch
+    endtry
+    set textwidth=76
+    set noautoindent
+    execute "normal gvgq"
+    set ai
+    set tw=500
+endfunction
+nmap <C-g> :call NoIndentGQ()<CR>
+command! -range NoIndGQ <line1>,<line2>call NoIndentGQRange()
+vmap <C-g> :NoIndGQ<CR>
+imap <C-BS> <Esc>lc^
 
 " Convert Rd `tabular` blocks to `describe` blocks
 function! Tabular2describe() range
