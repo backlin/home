@@ -30,8 +30,9 @@ alias cleanmac='find . -iname '._*' -exec rm -rf {} \;'
 alias tank='ssh -X -L 8000:redmine:443 -L 8001:helpit:443 -L 8002:mysql:3306 backch@tank'
 
 # Uppmax 
-alias daysleeper='salloc --no-shell -A b2010028 -p core -n 1 -t'
-alias scancelsleep='myq | "grep (null)" | cut -c 10-18 | xargs scancel'
+alias snode='salloc --no-shell -A b2010028 --qos=b2010028_4nodes -p node -N 1 -J inter -t'
+alias score='salloc --no-shell -A b2010028 --qos=b2010028_4nodes -p core -J inter -t'
+alias scancelsleep='myq | grep inter | cut -c 10-18 | xargs scancel'
 alias mmq='squeue -A b2010028'
 alias myq='squeue | grep chrib'
 
