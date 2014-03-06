@@ -442,6 +442,10 @@ nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
+imap <A-Up> <Esc><A-Up>a
+imap <A-Down> <Esc><A-Down>a
+imap <A-Left> <Esc><A-Left>a
+imap <A-Right> <Esc><A-Right>a
 
 function! NoIndentGQ()
     try
