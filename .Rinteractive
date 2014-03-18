@@ -490,6 +490,22 @@ zscore <- function(x, dim, ...){
         stop("Datatype not supported")
 }
 
+union.diff <- function(x, y){
+    x.name <- deparse(substitute(x))
+    y.name <- deparse(substitute(y))
+    if(!is.vector(x)) x <- names(x)
+    if(!is.vector(y)) y <- names(y)
+    if(is.null(x) || is.null(y)){
+        stop("Only vectors and objects with named elements are supported (e.g. data frames).")
+    }
+    cat("In both\n")
+    print(a[a %in% b])
+    cat("\nOnly in", , "\n")
+    print(a[!a %in% b])
+    cat("\nOnly in", , "\n")
+    print(b[!b %in% a])
+}
+
 
 #---------------------------------------------------
 # Improved list of objects
