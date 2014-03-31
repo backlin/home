@@ -7,9 +7,3 @@ if [ -f ~/.bash_patches ]; then
 fi
 export TERM="xterm-256color"
 
-# Include ustom locale settings if they exist
-# (gdm parses .profile so these settings will 
-# also be active within the Gnome environment).
-if [ -f "$HOME/.custom_locale"]; then
-       . "$HOME/.custom_locale"
-fi
