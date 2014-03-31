@@ -572,6 +572,7 @@ ls.deb  <- function(items = search ()){
 #-------------------------------------------------------[ Workspace management ]
 
 library("dataview")
+options(color.scheme = "dark on light")
 
 ev <- function(...) entry.view(...)
 hv <- heat.view

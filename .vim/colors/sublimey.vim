@@ -50,6 +50,7 @@ hi Title	guifg=indianred
 hi Visual	gui=none guifg=black guibg=#d9e1f9
 "hi VisualNOS
 hi WarningMsg	guifg=salmon
+hi ColorColumn guibg=#f2f5f7
 "hi WildMenu
 "hi Menu
 "hi Scrollbar
