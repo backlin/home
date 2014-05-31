@@ -1,6 +1,12 @@
 
 #---------------------------------------------------------[ Package management ]
 
+install.bioc <- function(pkg){
+    if(!"package:BiocInstaller" %in% search())
+        source("http://bioconductor.org/biocLite.R")
+    bioclite(pkg)
+}
+
 # Case insensitive package loading
 # In case package is not found, prompt for installation
 library <- function(..., character.only=FALSE, install){
@@ -499,11 +505,11 @@ union.diff <- function(x, y){
         stop("Only vectors and objects with named elements are supported (e.g. data frames).")
     }
     cat("In both\n")
-    print(a[a %in% b])
-    cat("\nOnly in", , "\n")
-    print(a[!a %in% b])
-    cat("\nOnly in", , "\n")
-    print(b[!b %in% a])
+    print(x[x %in% y])
+    cat("\nOnly in", x.name, "\n")
+    print(x[!x %in% y])
+    cat("\nOnly in", y.name, "\n")
+    print(y[!y %in% x])
 }
 
 
