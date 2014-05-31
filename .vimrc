@@ -399,6 +399,10 @@ endfunction
 " => Mitt och Björns fuffens
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Screen plugin
+"map \s :ScreenShell
+"map \l :ScreenSend
+
 " Vim's R integration
 let vimrplugin_noscreenrc = 1   " Use ~/.screenrc instead of the plugin's
 let vimrplugin_tmux = 0 
