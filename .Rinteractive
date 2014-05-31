@@ -70,8 +70,8 @@ reload <- function(pkg){
         eval(substitute(library(p), list(p=p)))
 }
 
-roxygen.update.description <- function(){
-    pkgName <- gsub(".*/", "", getwd())
+roxygen.update.description <- function(pkgName){
+    if(missing(pkgName)) pkgName <- gsub(".*/", "", getwd())
     if(!pkgName %in% dir()) stop("Cannot update version number, are you in the right folder?")
 
     setwd(pkgName)
