@@ -4,7 +4,7 @@
 install.bioc <- function(pkg){
     if(!"package:BiocInstaller" %in% search())
         source("http://bioconductor.org/biocLite.R")
-    bioclite(pkg)
+    biocLite(pkg)
 }
 
 # Case insensitive package loading
