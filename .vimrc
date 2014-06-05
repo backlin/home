@@ -404,8 +404,9 @@ endfunction
 "map \l :ScreenSend
 
 " Vim's R integration
-let vimrplugin_noscreenrc = 1   " Use ~/.screenrc instead of the plugin's
-let vimrplugin_tmux = 0 
+"let vimrplugin_noscreenrc = 1   " Use ~/.screenrc instead of the plugin's
+"let vimrplugin_tmux = 0 " If you want to use screen instead of tmux
+let vimrplugin_notmuxconf = 1 
 
 " Enter adds new lines without entering insert mode
 nmap <C-Enter> O<Esc>j

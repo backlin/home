@@ -32,3 +32,4 @@ alias scancelsleep='myq | grep inter | cut -c 10-18 | xargs scancel'
 alias mmq='squeue -A b2010028'
 alias myq='squeue | grep chrib'
 
+alias tmux="TERM=xterm-256color tmux"
