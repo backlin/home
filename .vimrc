@@ -407,6 +407,7 @@ endfunction
 "let vimrplugin_noscreenrc = 1   " Use ~/.screenrc instead of the plugin's
 "let vimrplugin_tmux = 0 " If you want to use screen instead of tmux
 let vimrplugin_notmuxconf = 1 
+let vimrplugin_assign = 0
 
 " Enter adds new lines without entering insert mode
 nmap <C-Enter> O<Esc>j
