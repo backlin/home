@@ -449,8 +449,8 @@ table.any <- function(x){
         names.length <- max(sapply(names(x), nchar))
         field.length <- NULL
         for(y in x){
-            if(length(field.length) < length(levels(y))){
-                field.length[(length(field.length)+1):length(levels(y))] <- 0
+            if(length(field.length) < nlevels(y)){
+                field.length[(length(field.length)+1):nlevels(y)] <- 0
             }
             for(i in 1:length(field.length)){
                 field.length[i] <- max(nchar(levels(y)[i]), sprintf("%i", table(y)[i]))
