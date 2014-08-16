@@ -356,6 +356,12 @@ order2rank <- function(o){
     i
 }
 
+overlap <- function(x){
+    sapply(x, function(i)
+        sapply(x, function(j)
+            sum(i %in% j)))
+}
+
 na.fill <- function(x, fill){
     x[is.na(x)] <- fill
     return(x)
@@ -393,7 +399,10 @@ printf <- function(...) cat(sprintf(...))
 
 pwd <- getwd
 
-q <- function() quit(save="no")
+q <- function(){
+    savehistory()
+    quit(save="no")
+}
 
 sample.binary <- function(total, selected){
     if(selected < 1) selected <- round(total*selected) # Selected was provided as a fraction
