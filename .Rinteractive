@@ -97,6 +97,10 @@ roxygen.update.description <- function(pkgName){
 #
 #   http://stackoverflow.com/questions/12807237/r-undebug-all-functions
 
+recoveronce <- function(...){
+    options(error=NULL)
+    recover(...)
+}
 
 ## return the names of the objects (from a vector of list of
 ## names of objects) that are functions and have debug flag set
@@ -161,6 +165,8 @@ fig.usr <- function(){
     coord[c(3,1,4,2)] + c(-1, -1, 1, 1) *
         rev(apply(coord, 2, diff)) * mar.rel
 }
+
+hist <- function(..., col="skyblue") graphics::hist(..., col=col)
 
 
 #----------------------------------------------------------------[ Other stuff ]
