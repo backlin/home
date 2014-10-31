@@ -596,7 +596,7 @@ ev <- function(...) entry.view(...)
 #os <- whos
 #if(exists("wrap.view")) wv <- wrap.view
 if(!grepl("RStudio", session_info()$platform$ui)){
-    print.factor <- heat.view
+    #print.factor <- heat.view
     q <- function(save="no"){
         savehistory(file="~/.Rhistory")
         quit(save=save)
