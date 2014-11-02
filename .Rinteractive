@@ -591,12 +591,12 @@ require("synesthesia")
 options(color.scheme = "dark on light")
 
 ev <- function(...) entry.view(...)
-#hv <- heat.view
+hv <- heat.view
 #tv <- tree.view
 #os <- whos
 #if(exists("wrap.view")) wv <- wrap.view
 if(!grepl("RStudio", session_info()$platform$ui)){
-    #print.factor <- heat.view
+    print.factor <- heat.view
     q <- function(save="no"){
         savehistory(file="~/.Rhistory")
         quit(save=save)
@@ -604,5 +604,5 @@ if(!grepl("RStudio", session_info()$platform$ui)){
 }
 
 # Setup whos excluding
-whos.set.mask()
+whos.options(exclude=ls(), report.S4.size=FALSE)
 
