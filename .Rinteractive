@@ -59,16 +59,13 @@ library <- function(..., character.only=FALSE, install){
     }
 }
 
-roxygen.update.description <- function(path="."){
-    f <- dir(path, "DESCRIPTION")
+bump.version <- function(path="."){
+    f <- dir(path, "DESCRIPTION", full.names=TRUE)
     if(is.null(f)){
         f <- dir(gsub(".*/", "", getwd()), "DESCRIPTION", full.names=TRUE)
         if(is.null(f)) stop("Can't find the DESCRIPTION file, please provide a path.")
     }
-
-    tab <- read.table(f, sep="\n",
-                      quote="~", comment.char="~",
-                      stringsAsFactors=FALSE, blank.lines.skip=FALSE)[[1]]
+    tab <- readLines(f)
     i <- grep("^Version:", tab)
     build.no <- as.integer(sub(".*-", "", tab[i])) + 1
     tab[i] <- sub("\\d+$", build.no, tab[i])

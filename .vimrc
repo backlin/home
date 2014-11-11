@@ -97,3 +97,9 @@ command! -range Tab2desc <line1>,<line2>call Tabular2describe()
 " Jump back to position prior to searching
 nmap § ``
 
+function CleanBib()
+    %g/^\(abstract\|file\|keywords\)/d
+    %s/{\{2,\}/{/g
+    %s/}\{2,\}/}/g
+    %g/^\w/>
+endfunction
