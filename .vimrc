@@ -4,6 +4,14 @@ so ~/.vim/vimrc_vundle.vim
 " Great base config
 so ~/.vim/vimrc_amir.vim
 
+"--------------------------------------------------------[ Personal appearance ]
+
+colorscheme solarized
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+set background=light
+set colorcolumn=81
+
 "----------------------------------------------------[ Mitt och Björns fuffens ]
 
 " Screen plugin
