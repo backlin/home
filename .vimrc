@@ -10,7 +10,9 @@ colorscheme solarized
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 set background=light
-set colorcolumn=81
+if exists('+colorcolumn')
+    set colorcolumn=81
+endif
 
 "----------------------------------------------------[ Mitt och Björns fuffens ]
 
