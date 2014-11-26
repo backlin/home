@@ -148,6 +148,16 @@ fig.usr <- function(){
 
 hist <- function(..., col="skyblue") graphics::hist(..., col=col)
 
+show.layout <- function(...){
+    N <- layout(...)
+    par(mar=rep(0, 4))
+    for(i in 1:N){
+        plot(0, 0, type="n", ann=FALSE, axes=FALSE)
+        text(0, 0, i, cex=4)
+        box()
+    }
+}
+
 
 #----------------------------------------------------------------[ Other stuff ]
 

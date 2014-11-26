@@ -98,8 +98,17 @@ command! -range Tab2desc <line1>,<line2>call Tabular2describe()
 nmap § ``
 
 function CleanBib()
-    %g/^\(abstract\|file\|keywords\)/d
+    %s/abstract\_[^}]\+},\n//
+    %s/file\_[^}]\+},\n//
+    %s/keywords\_[^}]\+},\n//
     %s/{\{2,\}/{/g
     %s/}\{2,\}/}/g
     %g/^\w/>
+    " Multiple uppercase letter words in titles are reduced to lower case, e.g. 'DNA'
+    " Wrap them in brackets to ensure correct rendering
+    %g/title\s\?=/s/\([A-Z][A-Z0-9]\+\)/{\1}/gc
 endfunction
+
+"function SwapNames()
+"    '<,'>g/^\(.*author\s\?=\s\?{\)},/
+"endfunction
