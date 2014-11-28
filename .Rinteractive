@@ -594,8 +594,9 @@ ls.deb  <- function(items = search ()){
 #-------------------------------------------------------[ Workspace management ]
 
 require("devtools")
+require("data.table")
+require("xtermStyle")
 require("synesthesia")
-options(color.scheme = "dark on light")
 
 ev <- function(...) entry.view(...)
 hv <- heat.view
@@ -611,5 +612,5 @@ if(!grepl("RStudio", session_info()$platform$ui)){
 }
 
 # Setup whos excluding
-whos.options(exclude=ls(), report.S4.size=FALSE)
+whos.exclude(ls())
 
