@@ -25,11 +25,18 @@ alias subgit='git status | grep -v "\.\./"'
 alias totalsize="awk '{SUM += $5} END {print SUM}'"
 alias cleanmac='find . -iname '._*' -exec rm -rf {} \;'
 
-# Uppmax 
-alias snode='salloc --no-shell -A b2010028 --qos=b2010028_4nodes -p node -N 1 -J inter -t'
-alias score='salloc --no-shell -A b2010028 --qos=b2010028_4nodes -p core -J inter -t'
+# Uppmax
+if echo $HOSTNAME | grep -q '^tintin'; then
+    # Mats' project
+    PROJ="p2010042"
+else
+    # Ann-Christine's project
+    PROJ="b2010028"
+fi
+alias score='salloc --no-shell -J inter -p core -A '$PROJ' -t'
+alias snode='salloc --no-shell -J inter -p node -N 1 -A '$PROJ' -t'
 alias scancelsleep='myq | grep inter | cut -c 10-18 | xargs scancel'
-alias mmq='squeue -A b2010028'
+alias pq='squeue -A '$PROJ
 alias myq='squeue | grep chrib'
 
 alias tmux="TERM=xterm-256color tmux"
