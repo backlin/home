@@ -28,6 +28,7 @@ let vimrplugin_assign = 0
 
 " Enter adds new lines without entering insert mode
 nmap <C-Enter> O<Esc>j
+nmap <c-s-Enter> a<CR><Esc>
 nmap <CR> o<Esc>k
 map <F2> :lcd %:p:h<CR>
 
@@ -108,17 +109,26 @@ command! -range Tab2desc <line1>,<line2>call Tabular2describe()
 nmap § ``
 
 function CleanBib()
-    %s/abstract\_[^}]\+},\n//
+    %s/abstract\_[^}]\+},\n//e
     %s/file\_[^}]\+},\n//
-    %s/keywords\_[^}]\+},\n//
-    %s/{\{2,\}/{/g
-    %s/}\{2,\}/}/g
+    %s/keywords\_[^}]\+},\n//e
+    %s/{\{2,\}/{/ge
+    %s/}\{2,\}/}/ge
     %g/^\w/>
     " Multiple uppercase letter words in titles are reduced to lower case, e.g. 'DNA'
     " Wrap them in brackets to ensure correct rendering
-    %g/title\s\?=/s/\([A-Z][A-Z0-9]\+\)/{\1}/gc
+    %g/title\s\?=/s/\([A-Z][A-Z0-9]\+\)/{\1}/ge
 endfunction
 
-"function SwapNames()
-"    '<,'>g/^\(.*author\s\?=\s\?{\)},/
-"endfunction
+function AuthorAbbr() range
+    s/\(\w\)\w*[ \~]\(\w\)\w*\.\?[ \~]\([a-zA-ZåäöÅÄÖéó-]\+\)/\3,\~\1.\2./ge "Lars K. Blad --> Blad, L K.
+    s/\(\w\)\w*-\(\w\)\w*[ \~]\([a-zA-ZåäöÅÄÖéó-]\+\)/\3,\~\1-\2./ge "Lars-Kenneth Blad --> Blad, L-K.
+    s/\(\w\)\w*[ \~]\([a-zA-ZåäöÅÄÖéó-]\+\)/\2,\~\1./ge              "Lars Stenberg --> Stenberg, L.
+endfunction
+
+" Lilypond
+filetype off
+set runtimepath+=/usr/share/lilypond/2.16.2/vim
+filetype on
+syntax on
+

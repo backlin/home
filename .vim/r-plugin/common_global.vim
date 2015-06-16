@@ -2282,12 +2282,8 @@ function RRealAction(rcmd)
         if a:rcmd == "plot" && g:vimrplugin_specialplot == 1
             let rfun = "vim.plot"
         endif
-        if a:rcmd == "plotsumm"
-            if g:vimrplugin_specialplot == 1
-                let raction = "vim.plot(" . rkeyword . "); summary(" . rkeyword . ")"
-            else
-                let raction = "plot(" . rkeyword . "); summary(" . rkeyword . ")"
-            endif
+        if a:rcmd == "whos-quote"
+            let raction = "whos(\"" . rkeyword . "\")"
             call SendCmdToR(raction)
             return
         endif
@@ -2433,16 +2429,18 @@ function RControlMenu()
     "-------------------------------
     menu R.Command.-Sep2- <nul>
     call RCreateMenuItem("nvi", 'Command.Arguments\ (cur)', '<Plug>RShowArgs', 'ra', ':call RAction("args")')
+    call RCreateMenuItem("nvi", 'Command.Info\ (cur)', '<Plug>RShowEx', 'ri', ':call RAction("whos-quote")')
     call RCreateMenuItem("nvi", 'Command.Whos\ (cur)', '<Plug>RShowEx', 're', ':call RAction("whos")')
+    call RCreateMenuItem("nvi", 'Command.Browse\ (cur)', '<Plug>RShowEx', 'rb', ':call RAction("browse")')
     call RCreateMenuItem("nvi", 'Command.Length\ (cur)', '<Plug>RShowEx', 'rw', ':call RAction("length")')
     call RCreateMenuItem("nvi", 'Command.Dim\ (cur)', '<Plug>RShowEx', 'rq', ':call RAction("dim")')
     call RCreateMenuItem("nvi", 'Command.Head\ (cur)', '<Plug>RClearConsole', 'rr', ':call RAction("head")')
     call RCreateMenuItem("nvi", 'Command.Help\ (cur)', '<Plug>RHelp', 'rh', ':call RAction("help")')
+    call RCreateMenuItem("nvi", 'Command.DebugOnce\ (cur)', '<Plug>RShowEx', 'rd', ':call RAction("debugonce")')
     "-------------------------------
     menu R.Command.-Sep3- <nul>
     call RCreateMenuItem("nvi", 'Command.Summary\ (cur)', '<Plug>RSummary', 'rs', ':call RAction("summary")')
     call RCreateMenuItem("nvi", 'Command.Plot\ (cur)', '<Plug>RPlot', 'rg', ':call RAction("plot")')
-    call RCreateMenuItem("nvi", 'Command.Plot\ and\ summary\ (cur)', '<Plug>RSPlot', 'rb', ':call RAction("plotsumm")')
     let g:rplugin_hasmenu = 1
 endfunction
 
@@ -2461,17 +2459,19 @@ function RControlMaps()
     " Arguments, example, help
     "-------------------------------------
     call RCreateMaps("nvi", '<Plug>RShowArgs',     'ra', ':call RAction("args")')
+    call RCreateMaps("nvi", '<Plug>RShowEx',       'ri', ':call RAction("whos-quote")')
     call RCreateMaps("nvi", '<Plug>RShowEx',       're', ':call RAction("whos")')
+    call RCreateMaps("nvi", '<Plug>RShowEx',       'rb', ':call RAction("browse")')
     call RCreateMaps("nvi", '<Plug>RShowEx',       'rw', ':call RAction("length")')
     call RCreateMaps("nvi", '<Plug>RShowEx',       'rq', ':call RAction("dim")')
     call RCreateMaps("nvi", '<Plug>RClearConsole', 'rr', ':call RAction("head")')
     call RCreateMaps("nvi", '<Plug>RHelp',         'rh', ':call RAction("help")')
+    call RCreateMaps("nvi", '<Plug>RDebugOnce',    'rd', ':call RAction("debugonce")')
 
-    " Summary, plot, both
+    " Summary, plot
     "-------------------------------------
     call RCreateMaps("nvi", '<Plug>RSummary',      'rs', ':call RAction("summary")')
     call RCreateMaps("nvi", '<Plug>RPlot',         'rg', ':call RAction("plot")')
-    call RCreateMaps("nvi", '<Plug>RSPlot',        'rb', ':call RAction("plotsumm")')
 
     " Build list of objects for omni completion
     "-------------------------------------
@@ -2604,7 +2604,7 @@ function MakeRMenu()
     "-------------------------------
     menu R.Command.-Sep4- <nul>
     if &filetype != "rdoc"
-        call RCreateMenuItem("nvi", 'Command.Set\ working\ directory\ (cur\ file\ path)', '<Plug>RSetwd', 'rd', ':call RSetWD()')
+        "call RCreateMenuItem("nvi", 'Command.Set\ working\ directory\ (cur\ file\ path)', '<Plug>RSetwd', 'rd', ':call RSetWD()')
     endif
     "-------------------------------
     if &filetype == "rnoweb" || &filetype == "rmd" || &filetype == "rrst" || g:vimrplugin_never_unmake_menu

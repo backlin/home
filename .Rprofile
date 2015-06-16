@@ -6,6 +6,7 @@
         loadhistory()
         cols <- Sys.getenv("COLUMNS")
         if(nzchar(cols)) options(width=as.integer(cols))
+        rm(cols)
         tryCatch(source("~/.Rinteractive"), error=print)
         if(file.exists("~/.Rpatches"))
             tryCatch(source("~/.Rpatches"), error=print)

@@ -214,28 +214,20 @@ cd <- function(...){
 }
 
 clc <- function(){
-    #printf("%s", rep("\n", 40))
-
-    #printf("%s%s%s", paste(rep("\n", 5), collapse=""),
-    #                      style(paste(rep("\n", 30), collapse=""), bg=194),
-    #                      paste(rep("\n", 5), collapse=""))
-    if(!is.null(getOption("color.scheme")) && getOption("color.scheme") == "dark on light"){
-        x <- round(5*seq(runif(1), 1, length=15))
-        y <- round(5*seq(runif(1), 1, length=15))
-        z <- round(5*seq(0, 1, length=15))
-    } else {
-        x <- round(5*seq(runif(1), 0, length=15))
-        y <- round(5*seq(runif(1), 0, length=15))
-        z <- round(5*seq(1, 0, length=15))
-    }
-    ramp <- trunc(16 + x + 6*y + 6*6*z)
+    x <- round(5*seq(runif(1), 1, length=15))
+    y <- round(5*seq(runif(1), 1, length=15))
+    z <- round(5*seq(0, 1, length=15))
     
-    str <- rep("\n", 5)
-    for(i in trunc(c(rev(ramp), ramp))){
-        str <- c(str, style(paste(rep("\n", 1), collapse=""), bg=i))
-    }
-    str <- c(str, rep("\n", 5))
-    cat(str)
+    ## Light on dark
+    #x <- round(5*seq(runif(1), 0, length=15))
+    #y <- round(5*seq(runif(1), 0, length=15))
+    #z <- round(5*seq(1, 0, length=15))
+
+    ramp <- 16 + x + 6*y + 6*6*z
+    cat(paste(sapply(c(rev(ramp), ramp), function(i) style(bg=i)),
+          paste(rep(" ", Sys.getenv("COLUMNS")), collapse=""),
+          sep="", collapse="\n"),
+          style.clear(), sep="")
 }
 
 #' Decimal to fraction conversion
@@ -301,14 +293,6 @@ is.blank <- function(x, false.triggers=FALSE){
 
 lattice.group.col <- c("#0080ff", "#ff00ff", "#006400", "#ff0000", "#ffa500", "#00ff00", "#a52a2a")
 
-leaves <- function(x){
-    if(any(sapply(x, is.list))){
-        return(unlist(lapply(x, leaves), recursive=FALSE))
-    } else {
-        return(x)
-    }
-}
-
 log.seq <- function(start, end, length=10) exp(seq(log(start), log(end), length=length))
 inv.seq <- function(start, end, length=10) 1/seq(1/start, 1/end, length=length)
 log.seq.int <- function(...) int.seq(..., seq.f=log.seq)
@@ -363,11 +347,6 @@ na.fill <- function(x, fill){
     return(x)
 }
 na.rm <- function(x) x[!is.na(x)]
-na.rm.max <- function(...) max(..., na.rm=TRUE)
-na.rm.mean <- function(...) mean(..., na.rm=TRUE)
-na.rm.median <- function(...) median(..., na.rm=TRUE)
-na.rm.min <- function(...) min(..., na.rm=TRUE)
-na.rm.sd <- function(...) sd(..., na.rm=TRUE)
 
 mode.value <- function(x) levels(x)[table(x) == max(table(x))]
 
@@ -390,8 +369,6 @@ pack.list <- function(lst, fld){
     }
     return(res)
 }
-
-printf <- function(...) cat(sprintf(...))
 
 pwd <- getwd
 
@@ -438,63 +415,11 @@ snna <- function(x) sum(!is.na(x))
 source.all <- function(path="."){
     if(!file.exists(path))
         stop("Directory does not exists.")
-    for(f in grep("\\.R$", dir(path), value=TRUE))
+    for(f in grep("\\.[Rr]$", dir(path), value=TRUE))
         source(paste(path, f, sep="/"))
 }
 
-table.any <- function(x){
-    if(is.factor(x)){
-        table(x)
-    } else if(is.list(x)){
-        names.length <- max(sapply(names(x), nchar))
-        field.length <- NULL
-        for(y in x){
-            if(length(field.length) < nlevels(y)){
-                field.length[(length(field.length)+1):nlevels(y)] <- 0
-            }
-            for(i in 1:length(field.length)){
-                field.length[i] <- max(nchar(levels(y)[i]), sprintf("%i", table(y)[i]))
-            }
-        }
-        last.levels <- NULL
-        for(col in names(x)){
-            y <- x[[col]]
-            if(!identical(last.levels, levels(y))){
-                last.levels <- levels(y)
-                cat(rep(" ", names.length+1),
-                    do.call(sprintf, c(as.list(paste("%", field.length, "s", sep="", collapse=" ")), last.levels)),
-                    "\n", sep="")
-            }
-            cat(col,
-                rep(" ", names.length+1-nchar(col)),
-                do.call(sprintf, c(as.list(paste("%", field.length, "i", sep="", collapse=" ")), table(y))),
-                "\n", sep="")
-        }
-    }
-}
-
-top <- function(x, n=10)      return(sort(x[!is.na(x)][x[!is.na(x)] >= sort(x, decreasing=TRUE)[n]][1:n], decreasing=TRUE))
-bottom <- function(x, n=10)   return(sort(x[!is.na(x)][x[!is.na(x)] <= sort(x, decreasing=FALSE)[n]][1:n], decreasing=FALSE))
-largest <- function(x, n=10)  return(sort(x[!is.na(x)][abs(x[!is.na(x)]) >= sort(abs(x), decreasing=TRUE)[n]][1:n], decreasing=TRUE))
-smallest <- function(x, n=10) return(sort(x[!is.na(x)][abs(x[!is.na(x)]) <= sort(abs(x), decreasing=FALSE)[n]][1:n], decreasing=FALSE))
-
 trim <- function(str) sub("^\\s*", "", sub("\\s*$", "", str))
-
-zscore <- function(x, dim, ...){
-    if(is.list(x)){
-        res <- lapply(x, function(x) (x - mean(x, ...)) / sd(x, ...))
-        if(is.data.frame(x)){
-            return(data.frame(res))
-        } else {
-            return(res)
-        }
-    } else if(is.numeric(x)){
-        if(missing(dim))
-            return((x - mean(x, ...)) / sd(as.vector(x), ...))
-        
-    } else
-        stop("Datatype not supported")
-}
 
 union.diff <- function(x, y){
     x.name <- deparse(substitute(x))
@@ -596,21 +521,26 @@ ls.deb  <- function(items = search ()){
 require("devtools")
 require("data.table")
 require("xtermStyle")
-require("synesthesia")
+require("dataview")
+require("magrittr")
+require("tidyr")
+require("dplyr")
+opt <- default.options()
+opt$columns$Key <- NULL
+opt$columns$keyed <- haskey
+opt$print$comment <- function(x) ifelse(x, "+!", "")
+opt$print$keyed <- function(x) ifelse(x, "╥─o", "")
+options(synesthesia = opt)
 
 ev <- function(...) entry.view(...)
 hv <- heat.view
-#tv <- tree.view
-#os <- whos
-#if(exists("wrap.view")) wv <- wrap.view
 if(!grepl("RStudio", session_info()$platform$ui)){
     print.factor <- heat.view
-    q <- function(save="no"){
-        savehistory(file="~/.Rhistory")
-        quit(save=save)
-    }
 }
 
-# Setup whos excluding
-whos.exclude(ls())
+# Save this for the whos-masking below
+if(!exists("startup.objs"))
+    startup.objs <- c(ls(all.names=TRUE), "startup.objs")
+# Keep in workspace to be saved and loaded together with in
+whos.exclude(startup.objs)
 
