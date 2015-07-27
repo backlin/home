@@ -126,6 +126,12 @@ function AuthorAbbr() range
     s/\(\w\)\w*[ \~]\([a-zA-ZåäöÅÄÖéó-]\+\)/\2,\~\1./ge              "Lars Stenberg --> Stenberg, L.
 endfunction
 
+" Add spaces around '='
+function SpaceAssingments()
+    %s/\([^ ]\)=/\1 =/ge
+    %s/=\([^ ]\)/= \1/ge
+endfunction
+
 " Lilypond
 filetype off
 set runtimepath+=/usr/share/lilypond/2.16.2/vim
