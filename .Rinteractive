@@ -530,7 +530,7 @@ opt$columns$Key <- NULL
 opt$columns$keyed <- haskey
 opt$print$comment <- function(x) ifelse(x, "+!", "")
 opt$print$keyed <- function(x) ifelse(x, "╥─o", "")
-options(synesthesia = opt)
+options(dataview = opt)
 
 ev <- function(...) entry.view(...)
 hv <- heat.view

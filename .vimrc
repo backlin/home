@@ -4,7 +4,9 @@ so ~/.vim/vimrc_vundle.vim
 " Great base config
 so ~/.vim/vimrc_amir.vim
 
-"--------------------------------------------------------[ Personal appearance ]
+Plugin 'derekwyatt/vim-scala'
+
+"-----------------------------------------------------------------[ Appearance ]
 
 colorscheme solarized
 let g:solarized_termcolors=256
@@ -13,6 +15,12 @@ set background=light
 if exists('+colorcolumn')
     set colorcolumn=81
 endif
+
+"----------------------------------------------------------------[ Preferences ]
+
+set spelllang=en_us
+imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+nmap <c-l> 1z=
 
 "----------------------------------------------------[ Mitt och Björns fuffens ]
 
