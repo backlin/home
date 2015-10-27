@@ -5,6 +5,7 @@ so ~/.vim/vimrc_vundle.vim
 so ~/.vim/vimrc_amir.vim
 
 Plugin 'derekwyatt/vim-scala'
+Plugin 'jalvesaq/R-Vim-runtime'
 
 "-----------------------------------------------------------------[ Appearance ]
 
@@ -36,7 +37,7 @@ let vimrplugin_assign = 0
 
 " Enter adds new lines without entering insert mode
 nmap <C-Enter> O<Esc>j
-nmap <c-s-Enter> a<CR><Esc>
+nmap <c-s-Enter> i<CR><Esc>
 nmap <CR> o<Esc>k
 map <F2> :lcd %:p:h<CR>
 
