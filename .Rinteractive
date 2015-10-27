@@ -8,14 +8,13 @@ pkg <- intersect(pkg, pkg.installed)
 for(p in pkg){
     require(p, character.only=TRUE)
 }
-if(!is.null(pkg.missing)){
+if(length(pkg.missing) > 0){
     cat("Could not load some of Christofer's start-up package(s), ", 
         "type the following to install them and restart R:\n",
         "   install.packages(",
         paste('"', pkg.missing, '"', sep="", collapse=", "),
         ")\n", sep="")
 }
-rm(p, pkg, pkg.installed, pkg.missing)
 
 # dataview
 if("package:dataview" %in% search()){
@@ -42,14 +41,18 @@ if("package:dataview" %in% search()){
 }
 
 # Vim integration
-if(!try(require("vimcom"), silent=TRUE)){
-    cat("Vim integration not installed, see http://www.lepem.ufc.br/jaa/vimcom.html for instructions.\n")
-} else {
+if("vimcom" %in% pkg.installed){
+    require("vimcom")
     options(vimcom.verbose = 1)
+} else {
+    cat("Vim integration not installed, see http://www.lepem.ufc.br/jaa/vimcom.html for instructions.\n")
 }
 
 # My miscellaneous functions
-if(!require("Bmisc", quietly=TRUE)){
-    cat("The `Bmisc` package is not installed.\n")
+if("Bmisc" %in% pkg.installed){
+    require("Bmisc")
+} else {
+    cat("The `Bmisc` package is not installed (and not available on CRAN).\n")
 }
 
+rm(p, pkg, pkg.installed, pkg.missing)
