@@ -1,47 +1,49 @@
-
-options(vimcom.verbose = 1)
-pkg <- c("Bmisc", "vimcom", "devtools", "xtermStyle", "dataview",
+# Load CRAN packages
+pkg <- c("devtools", "xtermStyle", "dataview",
          #"data.table",
          "magrittr", "tidyr", "dplyr")
 pkg.installed <- sapply(pkg, require, quietly=TRUE, character.only = TRUE)
-if(!pkg.installed["vimcom"]){
-    cat("Could not load vimcom. Please follow these instructions to install it: http://www.lepem.ufc.br/jaa/vimcom.html")
+if(any(!pkg.installed)){
+    cat("Could not load some of Christofer's start-up package(s),", 
+        "type the following to install them and restart R:\n   install.packages(",
+        paste('"', pkg[!pkg.installed], '"', sep="", collapse=", "),
+        ")\n", sep="")
 }
-pkg <- setdiff(names(pkg.installed)[!pkg.installed], "vimcom")
-if(any(pkg)){
-    cat("Could not load package(s) ", 
-        paste("`", pkg, "`", sep="", collapse=", "),
-        ", would you like to install and retry loading them?\n", sep="")
-    ans <- ""
-    while(!tolower(ans) %in% c("y", "n")){
-        ans <- readLines("[y/n]")
-    }
-    if(ans == "y") install.packages(pkg)
-    for(p in pkg) require(p, character.only=TRUE)
-    rm(p)
-}
-rm(pkg)
+rm(pkg, pkg.installed)
 
 # dataview
-if("package:data.table" %in% search()){
-    opt <- default.options()
-    opt$columns$Key <- NULL
-    opt$columns$keyed <- haskey
-    opt$print$comment <- function(x) ifelse(x, "+!", "")
-    opt$print$keyed <- function(x) ifelse(x, "╥─o", "")
-    options(dataview = opt)
+if("package:dataview" %in% search()){
+    ev <- function(...) entry.view(...)
+    hv <- heat.view
+    if(!grepl("RStudio", session_info()$platform$ui)){
+        print.factor <- heat.view
+    }
+
+    # Save this for the whos-masking below
+    if(!exists("startup.objs"))
+        startup.objs <- c(ls(all.names=TRUE), "startup.objs")
+    # Keep in workspace to be saved and loaded together with in
+    whos.exclude(startup.objs)
+
+    if("package:data.table" %in% search()){
+        opt <- default.options()
+        opt$columns$Key <- NULL
+        opt$columns$keyed <- haskey
+        opt$print$comment <- function(x) ifelse(x, "+!", "")
+        opt$print$keyed <- function(x) ifelse(x, "╥─o", "")
+        options(dataview = opt)
+    }
 }
 
-ev <- function(...) entry.view(...)
-hv <- heat.view
-if(!grepl("RStudio", session_info()$platform$ui)){
-    print.factor <- heat.view
+# Vim integration
+if(!require("vimcom", quietly=TRUE)){
+    cat("Vim integration not installed, see http://www.lepem.ufc.br/jaa/vimcom.html for instructions.\n")
+} else {
+    options(vimcom.verbose = 1)
 }
 
-# Save this for the whos-masking below
-if(!exists("startup.objs"))
-    startup.objs <- c(ls(all.names=TRUE), "startup.objs")
-# Keep in workspace to be saved and loaded together with in
-whos.exclude(startup.objs)
+# My miscellaneous functions
+if(!require("Bmisc", quietly=TRUE)){
+    cat("The `Bmisc` package is not installed.\n")
+}
 
-gbp2sek <- 12.6320
