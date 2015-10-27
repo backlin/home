@@ -2,14 +2,20 @@
 pkg <- c("devtools", "xtermStyle", "dataview",
          #"data.table",
          "magrittr", "tidyr", "dplyr")
-pkg.installed <- sapply(pkg, require, quietly=TRUE, character.only = TRUE)
-if(any(!pkg.installed)){
-    cat("Could not load some of Christofer's start-up package(s),", 
-        "type the following to install them and restart R:\n   install.packages(",
-        paste('"', pkg[!pkg.installed], '"', sep="", collapse=", "),
+pkg.installed <- rownames(installed.packages())
+pkg.missing <- setdiff(pkg, pkg.installed)
+pkg <- intersect(pkg, pkg.installed)
+for(p in pkg){
+    require(p, character.only=TRUE)
+}
+if(!is.null(pkg.missing)){
+    cat("Could not load some of Christofer's start-up package(s), ", 
+        "type the following to install them and restart R:\n",
+        "   install.packages(",
+        paste('"', pkg.missing, '"', sep="", collapse=", "),
         ")\n", sep="")
 }
-rm(pkg, pkg.installed)
+rm(p, pkg, pkg.installed, pkg.missing)
 
 # dataview
 if("package:dataview" %in% search()){
@@ -36,7 +42,7 @@ if("package:dataview" %in% search()){
 }
 
 # Vim integration
-if(!require("vimcom", quietly=TRUE)){
+if(!try(require("vimcom"), silent=TRUE)){
     cat("Vim integration not installed, see http://www.lepem.ufc.br/jaa/vimcom.html for instructions.\n")
 } else {
     options(vimcom.verbose = 1)
