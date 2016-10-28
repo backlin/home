@@ -1,7 +1,11 @@
+require("utils")
+loadhistory()
+cols <- Sys.getenv("COLUMNS")
+if(nzchar(cols)) options(width=as.integer(cols))
+rm(cols)
+
 # Load CRAN packages
-pkg <- c("devtools", "xtermStyle", "dataview",
-         #"data.table",
-         "magrittr", "tidyr", "dplyr")
+pkg <- c("devtools", "xtermStyle", "dataview")
 pkg.installed <- rownames(installed.packages())
 pkg.missing <- setdiff(pkg, pkg.installed)
 pkg <- intersect(pkg, pkg.installed)
@@ -20,9 +24,6 @@ if(length(pkg.missing) > 0){
 if("package:dataview" %in% search()){
     ev <- function(...) entry.view(...)
     hv <- heat.view
-    if(!grepl("RStudio", session_info()$platform$ui)){
-        print.factor <- heat.view
-    }
 
     # Save this for the whos-masking below
     if(!exists("startup.objs"))
@@ -40,14 +41,6 @@ if("package:dataview" %in% search()){
     }
 }
 
-# Vim integration
-if("vimcom" %in% pkg.installed){
-    require("vimcom")
-    options(vimcom.verbose = 1)
-} else {
-    cat("Vim integration not installed, see http://www.lepem.ufc.br/jaa/vimcom.html for instructions.\n")
-}
-
 # My miscellaneous functions
 if("Bmisc" %in% pkg.installed){
     require("Bmisc")
@@ -55,4 +48,32 @@ if("Bmisc" %in% pkg.installed){
     cat("The `Bmisc` package is not installed (and not available on CRAN).\n")
 }
 
+#' Make variables from a data frame row
+#' 
+#' When designing complex calls to \code{mapply} or \code{foreach} it is often
+#' convenient to make a set of variables that match the function arguments.
+#' This often leads to a lot of statements like \code{a <- df$a}, so this function
+#' merely automates this.
+#' 
+#' @param df Data frame.
+#' @param i Row number.
+#' @return Nothing, but creates a number of variables in the global environment
+#'   named after the columns in \code{df}.
+#' @author Christofer \enc{Backlin}{Bäcklin}
+#' @export
+globvars <- function(df, i=1, vars=names(df)){
+  for(f in vars){
+    assign(f, df[[f]][i], envir = globalenv())
+  }
+}
+
 rm(p, pkg, pkg.installed, pkg.missing)
+
+
+venn <- function(a=10, b=20, ab=15, names=c("A", "B"), filename = "~/Desktop/venn.png", ...){
+  requireNamespace("VennDiagram")
+  x <- list(a = 1:(a+ab), b = a+1:(ab+b))
+  names(x) <- names
+  venn.diagram(x, filename = filename, ...)
+}
+
