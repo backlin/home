@@ -51,10 +51,10 @@ call vundle#end()
 "=============================================================[ Plug-in config ]
 
 " NerdTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let g:NERDTreeNodeDelimiter = "\u00a0" " https://www.reddit.com/r/vim/comments/a4yzyt/g_characters_prefixing_directory_and_file_names/
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"let g:NERDTreeNodeDelimiter = "\u00a0" " https://www.reddit.com/r/vim/comments/a4yzyt/g_characters_prefixing_directory_and_file_names/
 
 " vim-go
 let g:go_fmt_command = "goimports"
@@ -100,7 +100,7 @@ autocmd FileType go nmap <leader><Up> :cprevious<CR>
 set ruler
 set cursorline
 set fillchars=vert:\│ " Vertical split char https://stackoverflow.com/a/15177256/840460
-set number
+set number relativenumber
 
 syntax on
 set t_Co=256
@@ -111,7 +111,7 @@ set t_Co=256
 "colorscheme OceanicNextLight
 colorscheme OceanicNext
 
-set background=light
+set background=dark
 "colorscheme solarized
 
 
@@ -296,6 +296,6 @@ set autoindent
 filetype plugin indent on
 
 autocmd Filetype go,proto setlocal noexpandtab tabstop=4 softtabstop=4 shiftwidth=4
-autocmd Filetype python,php,json setlocal expandtab tabstop=4 softtabstop=4 shiftwidth=4
+autocmd Filetype python,php,json setlocal expandtab tabstop=4 softtabstop=4 shiftwidth=4 conceallevel=0
 autocmd Filetype python setlocal colorcolumn=121
 autocmd Filetype Jenkinsfile setlocal expandtab
