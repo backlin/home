@@ -155,3 +155,5 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /Users/christofer/go/bin/projectadmin projectadmin
 complete -o nospace -C /Users/christofer/go/bin/datamodel datamodel
 
+autoload -U compinit; compinit
+
