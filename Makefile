@@ -12,3 +12,6 @@ unlink:
 	-rm ~/.tmux.conf
 	-rm ~/.vimrc
 
+viridis.csv: viridis.R
+	R -f $<
+

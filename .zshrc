@@ -118,7 +118,7 @@ export CGO_LDFLAGS="-L$GCC_LIBS -lgfortran"
 export CGO_FFLAGS_ALLOW="-fdefault-real-8|-ffixed-form"
 
 export DYLD_LIBRARY_PATH="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/server/libjvm.dylib"
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+#export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 
 
 
