@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-bash $HOME/git/home/git-prune.sh
+git checkout master
+bash $HOME/git/home/git-pull-prune.sh
 git checkout -
 git rebase master
 

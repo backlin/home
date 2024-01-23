@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-$HOME/git/home/git-prune.sh
+git checkout master
+$HOME/git/home/git-pull-prune.sh
 git checkout -
 git merge master --no-ff
 

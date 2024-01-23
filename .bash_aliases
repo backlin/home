@@ -10,10 +10,9 @@ alias gd='git diff'
 alias gl='git log'
 alias gco='git checkout'
 alias gcb='git checkout -b'
-alias gll='git pull'
 alias gsh='git push'
 
-alias gp="$REPO/git-prune.sh"
+alias gll="$REPO/git-pull-prune.sh"
 alias gm="$REPO/git-merge-master.sh"
 alias gr="$REPO/git-rebase-master.sh"
 

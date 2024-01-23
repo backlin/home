@@ -33,7 +33,7 @@ Plugin 'Shougo/neocomplete.vim'           " Golang auto-completion
 Plugin 'mhartington/oceanic-next'         " Colorscheme
 "Plugin 'mustache/vim-mustache-handlebars' " Templating tool (used with jinja?)
 Plugin 'nvie/vim-flake8'                  " Python linter
-"Plugin 'scrooloose/nerdtree'              " File browser
+Plugin 'scrooloose/nerdtree'              " File browser
 "Plugin 'stephpy/vim-yaml'                 " Syntax highlighting
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-abolish'                " Edit casing
