@@ -152,7 +152,7 @@ autocmd Filetype yaml setlocal cursorcolumn
 " Jump back to position prior to searching
 nmap § ``
 
-set spelllang=en_us,se
+set spelllang=en_us,sv_se
 set dictionary+=/Users/christofer/git/ingest/cmd/datamodel/dictionary.txt
 
 set nowrap          " No word wrapping
