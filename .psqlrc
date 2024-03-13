@@ -1,0 +1,14 @@
+SET CLIENT_MIN_MESSAGES TO 'NOTICE';
+\setenv LANG en_US.UTF-8
+\x AUTO
+\set ON_ERROR_STOP on
+\psql null '(null)'
+\timing on
+\pset pager off
+\pset linestyle unicode
+
+-- Prevent mishaps in prod:
+\set r 'rollback;'
+\set AUTOCOMMIT_OFF
+-- Make rollback a habit!
+

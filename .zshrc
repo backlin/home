@@ -106,6 +106,7 @@ export LANG=en_US.UTF-8
 export PATH="/Library/TeX/texbin:$PATH"
 export PATH="$HOME/Library/Python/3.8/lib/python/site-packages:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/google-cloud-sdk/bin:$PATH"
@@ -149,11 +150,12 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
 
-source ~/git/home/.bash_aliases
+source $HOME/git/home/.mac_env
+source $HOME/git/home/.bash_aliases
+
+
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /Users/christofer/go/bin/projectadmin projectadmin
-complete -o nospace -C /Users/christofer/go/bin/datamodel datamodel
+complete -o nospace -C /Users/christofer.backlin/go/bin/datamodel datamodel
 
-autoload -U compinit; compinit
-
+complete -o nospace -C /Users/christofer.backlin/go/bin/projectadmin projectadmin
