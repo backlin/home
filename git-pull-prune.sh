@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
-git pull --rebase
-
-git remote prune origin
+git pull --prune --rebase
 
 # echo "Removing orphaned feature branches"
 # git br -vv | grep ": gone]" | awk '{print $1;}' | xargs git branch -D
