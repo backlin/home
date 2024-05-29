@@ -20,11 +20,15 @@ alias grhh='git reset --hard HEAD '
 alias grhh1='git reset --hard HEAD~1 '
 
 # https://eza.rocks/
-alias ls='eza --git '
+if [ $(which eza) ]; then
+  alias ls='eza --git '
+fi
 
 # https://github.com/ajeetdsouza/zoxide
-eval "$(zoxide init zsh)"
-alias cd=z
+if [ $(which zoxide) ]; then
+  eval "$(zoxide init zsh)"
+  alias cd=z
+fi
 
 alias mdm="make -C $HOME/git/ingest/ datamodel "
 alias dm=datamodel

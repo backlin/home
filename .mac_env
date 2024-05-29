@@ -3,7 +3,5 @@ export PATH="/opt/homebrew/bin:$PATH"
 
 autoload -U compinit; compinit
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /Users/$USER/go/bin/datamodel datamodel
-complete -o nospace -C /Users/$USER/go/bin/datamodel datamodel
 source $(brew --prefix)/etc/bash_completion.d/az
 
