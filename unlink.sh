@@ -8,3 +8,5 @@ rm -f ~/.psqlrc
 rm -f ~/.tmux.conf
 rm -f ~/.vimrc
 rm -f ~/.zshrc
+rm -f ~/.config/qmk/qmk.ini
+

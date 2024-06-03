@@ -1,0 +1,6 @@
+[alias]
+	co = checkout
+	br = branch -vv --sort=committerdate
+	ci = commit
+	st = status
+

@@ -105,6 +105,7 @@ export LANG=en_US.UTF-8
 
 export PATH="/Library/TeX/texbin:$PATH"
 export PATH="$HOME/Library/Python/3.8/lib/python/site-packages:$PATH"
+
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -113,36 +114,12 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/google-cloud-sdk/bin:$PATH"
 export PATH="/Applications/GoLand.app/Contents/MacOS:$PATH"
 
-export CGO_ENABLED=0
-GCC_LIBS="/opt/homebrew/opt/gcc@11/lib"
-export LD_LIBRARY_PATH="$GCC_LIBS:$LD_LIBRARY_PATH"
-export CGO_LDFLAGS="-L$GCC_LIBS -lgfortran"
-export CGO_FFLAGS_ALLOW="-fdefault-real-8|-ffixed-form"
-
-export DYLD_LIBRARY_PATH="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/server/libjvm.dylib"
-#export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-
-
-
-export PATH="$HOME/anaconda/bin:$PATH"
-
-## For a ipython notebook and pyspark integration
-#if which pyspark > /dev/null; then
-#  export SPARK_HOME="/usr/local/Cellar/apache-spark/2.0.2/libexec/"
-#	export SPARK_OPTS="--master:local[2]"
-#	export SPARK_LOG="$HOME/logs/spark/"
-#  export PYSPARK_SUBMIT_ARGS="--master local[2]"
-#fi
 
 export PYTHONPATH="$PYTHONPATH:."
 
 export GOPATH=$(go env GOPATH)
 export GOBIN=$GOPATH/bin
-export GOPRIVATE="github.com/formulatehq"
 export PATH=$PATH:$GOBIN
-
-# Needed for signing git commits (https://sabbour.me/setting-up-signed-git-commits-on-macos/)
-export GPG_TTY=$(tty)
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
@@ -159,9 +136,3 @@ if [ -f $HOME/git/home/.linux_env ]; then
 fi
 source $HOME/git/home/.bash_aliases
 
-
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /Users/christofer.backlin/go/bin/datamodel datamodel
-
-complete -o nospace -C /Users/christofer.backlin/go/bin/projectadmin projectadmin
