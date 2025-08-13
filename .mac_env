@@ -1,3 +1,6 @@
+export PATH="/Library/TeX/texbin:$PATH"
+export PATH="$HOME/Library/Python/3.8/lib/python/site-packages:$PATH"
+
 export PATH="$HOME/.cargo/bin:$PATH" # Rust apps, like eza
 export PATH="/opt/homebrew/bin:$PATH"
 

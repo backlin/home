@@ -1,5 +1,0 @@
-# Tip from Dean: https://relexsolutions.slack.com/archives/D05PBCXLBQS/p1709734491446829
-# Source: https://github.com/angular/components/blob/main/.bazelrc#L5-L10
-#
-build --symlink_prefix=/
-# run `bazel info output_base` to find out where the outputs went

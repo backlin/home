@@ -26,10 +26,8 @@ fi
 
 # https://github.com/ajeetdsouza/zoxide
 if [ $(which zoxide) ]; then
-  eval "$(zoxide init zsh)"
-  alias cd=z
+  eval "$(zoxide init zsh --cmd cd)"
 fi
 
 alias mdm="make -C $HOME/git/ingest/ datamodel "
 alias dm=datamodel
-

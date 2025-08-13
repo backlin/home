@@ -100,11 +100,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export LC_ALL=en_US.UTF-8  
+export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-export PATH="/Library/TeX/texbin:$PATH"
-export PATH="$HOME/Library/Python/3.8/lib/python/site-packages:$PATH"
 
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
@@ -113,7 +111,6 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/google-cloud-sdk/bin:$PATH"
 export PATH="/Applications/GoLand.app/Contents/MacOS:$PATH"
-
 
 export PYTHONPATH="$PYTHONPATH:."
 
@@ -128,11 +125,10 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
 
-if [ -f $HOME/git/home/.mac_env ]; then
+if [[ $(uname) == Darwin ]]; then
   source $HOME/git/home/.mac_env
 fi
-if [ -f $HOME/git/home/.linux_env ]; then
+if [[ $(uname) == Linux ]]; then
   source $HOME/git/home/.linux_env
 fi
 source $HOME/git/home/.bash_aliases
-
