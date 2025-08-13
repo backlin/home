@@ -1,0 +1,25 @@
+# Linux-specific environment configuration
+
+# Common Linux package manager paths
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/bin:$PATH"
+export PATH="/bin:$PATH"
+
+# Flatpak applications
+export PATH="/var/lib/flatpak/exports/bin:$PATH"
+export PATH="$HOME/.local/share/flatpak/exports/bin:$PATH"
+
+# Snap applications
+export PATH="/snap/bin:$PATH"
+
+# AppImage applications
+export PATH="$HOME/Applications:$PATH"
+
+# Linux-specific development tools
+export PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
+
+# Google Cloud SDK (Linux installation path)
+if [[ -d "$HOME/google-cloud-sdk" ]]; then
+  export PATH="$HOME/google-cloud-sdk/bin:$PATH"
+fi
+

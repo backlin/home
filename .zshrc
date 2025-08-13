@@ -100,35 +100,41 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Language and locale settings
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-
+# System-agnostic PATH additions
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="$HOME/google-cloud-sdk/bin:$PATH"
-export PATH="/Applications/GoLand.app/Contents/MacOS:$PATH"
 
+# Python configuration
 export PYTHONPATH="$PYTHONPATH:."
 
+# Go configuration
 export GOPATH=$(go env GOPATH)
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
+# pyenv configuration
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+
+# Poetry configuration
 export PATH="$HOME/.poetry/bin:$PATH"
 
+# Load system-specific configurations
 if [[ $(uname) == Darwin ]]; then
   source $HOME/git/home/.mac_env
 fi
 if [[ $(uname) == Linux ]]; then
   source $HOME/git/home/.linux_env
 fi
+
+# Load shared aliases
 source $HOME/git/home/.bash_aliases

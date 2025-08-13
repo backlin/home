@@ -1,10 +1,22 @@
+# Homebrew paths (Apple Silicon and Intel)
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+
+# TeX Live (MacTeX distribution)
 export PATH="/Library/TeX/texbin:$PATH"
+
+# Python user site-packages
 export PATH="$HOME/Library/Python/3.8/lib/python/site-packages:$PATH"
 
-export PATH="$HOME/.cargo/bin:$PATH" # Rust apps, like eza
-export PATH="/opt/homebrew/bin:$PATH"
+# macOS-specific applications
+export PATH="$HOME/google-cloud-sdk/bin:$PATH"
+export PATH="/Applications/GoLand.app/Contents/MacOS:$PATH"
 
+# Enable shell completions
 autoload -U compinit; compinit
 autoload -U +X bashcompinit && bashcompinit
-source $(brew --prefix)/etc/bash_completion.d/az
 
+# Azure CLI completion (if installed via Homebrew)
+if [[ -f $(brew --prefix)/etc/bash_completion.d/az ]]; then
+  source $(brew --prefix)/etc/bash_completion.d/az
+fi
