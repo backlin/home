@@ -135,3 +135,11 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # Uncomment to profile zsh startup time
 # Also uncomment the module load at the very top of this file
 # zprof
+
+# pnpm
+export PNPM_HOME="/home/christofer/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

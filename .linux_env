@@ -23,3 +23,10 @@ if [[ -d "$HOME/google-cloud-sdk" ]]; then
   export PATH="$HOME/google-cloud-sdk/bin:$PATH"
 fi
 
+# https://askubuntu.com/a/525029
+alias trash=" gio trash "
+
+# sudo apt install wl-clipboard (wl = Wayland)
+# Not using xclip since Ubuntu is no longer running X11.
+alias y=" wl-copy "
+alias p=" wl-paste "
