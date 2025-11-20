@@ -2,6 +2,8 @@
 # Also uncomment zprof at the very end of this file
 # zmodload zsh/zprof
 
+bindkey -v # Vim style keyboard bindings (default is Emacs style)
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -81,12 +83,14 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# Preferred editor
+if [[ -n $SSH_CONNECTION ]]; then
+  # Remote session
+  export EDITOR='vim'
+else
+  # Local session
+  export EDITOR='vim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -129,8 +133,6 @@ source $HOME/git/home/.bash_aliases
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Uncomment to profile zsh startup time
 # Also uncomment the module load at the very top of this file

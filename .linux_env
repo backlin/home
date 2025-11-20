@@ -23,6 +23,13 @@ if [[ -d "$HOME/google-cloud-sdk" ]]; then
   export PATH="$HOME/google-cloud-sdk/bin:$PATH"
 fi
 
+if [[ -d "home/linuxbrew" ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+
+#---[ Aliases ]-----------------------------------------------------------------
+
 # https://askubuntu.com/a/525029
 alias trash=" gio trash "
 
@@ -30,3 +37,6 @@ alias trash=" gio trash "
 # Not using xclip since Ubuntu is no longer running X11.
 alias y=" wl-copy "
 alias p=" wl-paste "
+
+alias lightmode=" gsettings set org.gnome.desktop.interface color-scheme 'prefer-light' "
+alias darkmode=" gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' "
