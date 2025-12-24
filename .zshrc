@@ -130,6 +130,10 @@ fi
 # Load shared aliases
 source $HOME/git/home/.bash_aliases
 
+if [ -f $HOME/.config/authzed ]; then
+  source $HOME/.config/authzed
+fi
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"

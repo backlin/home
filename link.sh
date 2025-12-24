@@ -9,6 +9,7 @@ if [[ $(uname) == Linux ]]; then
 fi
 ln .psqlrc ~/.psqlrc
 ln .tmux.conf ~/.tmux.conf
+ln .gitconfig ~/.gitconfig
 ln .vimrc ~/.vimrc
 ln .zshrc ~/.zshrc
 mkdir -p ~/.config/qmk

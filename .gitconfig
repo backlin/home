@@ -1,8 +1,8 @@
+[user]
+	name = Christofer Bäcklin
+	email = backlin@users.noreply.github.com
 [alias]
 	co = checkout
 	br = branch -vv --sort=committerdate
 	ci = commit
 	st = status
-[core]
-	editor = vim
-
